@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Itzel Leylaní & Sam</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* --- PALETA DE COLORES ACTUALIZADA --- */
+            --bg-color: #FAFAF5;        /* Blanco Marfil (Base) */
+            --bg-monogram: #FAFAF5;     
+            
+            /* NUEVO COLOR DEL SOBRE (Beige) */
+            --envelope-color: #E8E0D5;  /* Beige cálido para el sobre */
+            --envelope-shadow: #d1c7b7; /* Un tono más oscuro para la solapa/sombra */
+            
+            --accent-blue: #96ABC4;     /* Azul Cielo Empolvado (Para detalles internos) */
+            --accent-lilac: #C8A2C8;    /* Lila Romántico (Principal) */
+            --accent-silver: #C0C0C0;   /* Plata (Detalles) */
+            
+            --text-color: #5A5A66;      /* Gris Pizarra para texto */
+
+            /* --- FUENTES --- */
+            --font-script: 'Parisienne', cursive; /* Fuente elegante */
+            --font-body: 'Libre Franklin', sans-serif; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.8;
+            text-align: center;
+            overflow-x: hidden;
+            overflow-y: hidden; /* Bloqueamos scroll al inicio */
+        }
+
+        /* =========================================
+           ESTILOS DEL SOBRE (ACTUALIZADOS)
+           ========================================= */
+        #envelope-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            perspective: 1500px;
+            transition: opacity 1s ease-in-out, visibility 1s;
+        }
+
+        .envelope-wrapper {
+            position: relative; cursor: pointer;
+            width: 90%; max-width: 550px;
+            height: auto; aspect-ratio: 1.6/1;
+        }
+
+        .envelope-body {
+            position: absolute; bottom: 0; width: 100%; height: 100%;
+            /* CAMBIO: Usar el nuevo color beige */
+            background-color: var(--envelope-color); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15); /* Sombra más suave */
+            z-index: 10;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+        }
+
+        /* Triángulo de abajo (sombra sutil) */
+        .envelope-body::after {
+            content: ''; position: absolute; bottom: 0;
+            width: 0; height: 0; border-style: solid;
+            border-width: 0 275px 180px 275px;
+            border-color: transparent transparent rgba(0,0,0,0.03) transparent;
+        }
+        
+        /* Solapa Superior */
+        .envelope-flap {
+            position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+            /* CAMBIO: Usar el tono de sombra beige */
+            background-color: var(--envelope-shadow); 
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
+        }
+
+        /* El Sello de Lacre (SIN GIRO) */
+        .wax-seal {
+            position: absolute; top: 40%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110px; height: 110px; /* Un poco más grande */
+            z-index: 30;
+            /* Se eliminó border-radius y border para que se use la forma de tu PNG */
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); /* Sombra al PNG */
+            transition: opacity 0.5s, transform 0.3s ease;
+        }
+        /* Efecto al pasar el mouse por el sello */
+        .envelope-wrapper:hover .wax-seal { transform: translate(-50%, -50%) scale(1.05); }
+
+        .wax-seal img { width: 100%; height: 100%; object-fit: contain; }
+        /* SE ELIMINÓ LA ANIMACIÓN @keyframes spinSeal */
+
+        /* Mensaje "Toca para abrir" (TIPOGRAFÍA ELEGANTE) */
+        .tap-hint {
+            position: absolute; bottom: 30px; left: 0; width: 100%;
+            text-align: center;
+            /* CAMBIO DE FUENTE Y COLOR */
+            font-family: var(--font-script);
+            font-size: 1.8rem; 
+            color: #7a7a7a; /* Gris elegante que contrasta con el beige */
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5); /* Sombra blanca para legibilidad */
+            z-index: 40;
+            animation: pulse 2s infinite;
+            pointer-events: none;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+        /* --- ESTADOS DE APERTURA --- */
+        .envelope-open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope-open .wax-seal, .envelope-open .tap-hint { opacity: 0; }
+        .envelope-vanish { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(50px); }
+
+        /* =========================================
+           ESTILOS DEL CONTENIDO (SE MANTIENEN IGUAL)
+           ========================================= */
+        /* ... (El resto del CSS de la invitación sigue aquí sin cambios) ... */
+        .intro-section { background-color: var(--bg-monogram); padding: 40px 20px 60px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .monogram-img { width: 250px; max-width: 80%; height: auto; margin-bottom: 30px; mix-blend-mode: multiply; }
+        .postcard-wrapper { background-color: #fff; padding: 15px 15px 40px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transform: rotate(-2deg); max-width: 600px; width: 90%; transition: transform 0.3s ease; }
+        .postcard-wrapper:hover { transform: rotate(0deg) scale(1.02); }
+        .postcard-img { width: 100%; height: auto; display: block; filter: sepia(10%); }
+        .music-btn { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255,255,255,0.8); backdrop-filter: blur(5px); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.1); font-size: 20px; border: 1px solid #ddd; opacity: 0; transition: opacity 1s; }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .hero { position: relative; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; padding: 20px; }
+        .hero::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1629196914168-3a2652305f9f?q=80&w=1306&auto=format&fit=crop'); background-size: cover; background-position: center; z-index: -1; animation: kenBurns 20s infinite alternate ease-in-out; }
+        .hero-paper {
+
+    /* 2. AGREGA la imagen de fondo */
+    background-image:url("../Downloads/photo-1615799998603-7c6270a45196 (1).avif");
+    
+    /* 3. Ajustes para que la imagen se vea bien */
+    background-size: cover;    /* Hace que la imagen cubra todo el cuadro */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que se repita como mosaico */ width: 100%; max-width: 500px; padding: 70px 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); text-align: center; position: relative; animation: fadeInUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: translateY(50px); }
+        @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        .seal-img { width: 100px; height: auto; margin-bottom: 20px; margin-top: -90px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2)); }
+        .hero-pre { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; color: #555; margin-bottom: 15px; margin-top: 10px; }
+        .hero-names { font-family: var(--font-script); font-size: 4.5rem; line-height: 1.1; color: var(--accent-lilac); margin: 15px 0 25px 0; }
+        .countdown-section { padding: 60px 20px; background-color: var(--bg-color); }
+        .countdown-title { font-family: var(--font-body); color: var(--accent-blue); margin-bottom: 30px; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+        .timer { display: flex; justify-content: center; gap: 20px; }
+        .time-box span { font-size: 2.5rem; font-family: var(--font-body); font-weight: 300; color: var(--accent-blue); display: block; }
+        .time-box small { text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; color: #999; }
+        .quote-section { padding: 80px 20px; background-color: #fff; }
+        .quote-text { font-family: var(--font-script); font-size: 2.8rem; color: #777; max-width: 800px; margin: 0 auto; line-height: 1.4; }
+        .details-container { display: flex; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.05); margin-bottom: 60px; border-radius: 8px; overflow: hidden; }
+        .detail-box { flex: 1; min-width: 300px; padding: 60px 40px; border-right: 1px solid #eee; }
+        .detail-box:last-child { border-right: none; }
+        .icon { font-size: 3rem; margin-bottom: 20px; display: block; }
+        .detail-title { font-family: var(--font-body); color: var(--accent-blue); font-size: 1.4rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        .btn-location { display: inline-block; margin-top: 20px; padding: 10px 25px; border: 1px solid var(--accent-blue); color: var(--accent-blue); text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; transition: all 0.3s; }
+        .btn-location:hover { background: var(--accent-blue); color: #fff; }
+        .dresscode-section { padding: 80px 20px; background-color: #fff; }
+        .palette { display: flex; justify-content: center; gap: 25px; margin-top: 30px; }
+        .color-circle { width: 50px; height: 50px; border-radius: 50%; border: 1px solid #ddd; position: relative; }
+        .color-circle::after { content: "✕"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #a00; font-size: 1.2rem; }
+        .c-white { background: #FFFFFF; } .c-lilac { background: var(--accent-lilac); } .c-blue { background: var(--accent-blue); }
+        .gifts-section { padding: 80px 20px; background: linear-gradient(to bottom, var(--bg-color), #fff); }
+        .gift-btn { background-color: var(--accent-lilac); color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        .rsvp-section { padding: 100px 20px; background-color: var(--accent-blue); color: white; }
+        .rsvp-btn { background: white; color: var(--accent-blue); padding: 18px 50px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; letter-spacing: 1px; display: inline-block; margin-top: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: transform 0.2s; text-transform: uppercase; }
+        .rsvp-btn:hover { transform: scale(1.05); }
+        footer { padding: 40px; font-size: 0.8rem; color: #999; background: #fff; text-transform: uppercase; letter-spacing: 1px;}
+        @media(max-width: 768px) { .hero-names { font-size: 3.5rem; } .detail-box { border-right: none; border-bottom: 1px solid #eee; } .timer { gap: 10px; } .time-box span { font-size: 1.8rem; } .postcard-wrapper { max-width: 320px; } .envelope-wrapper { width: 85%; } }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-overlay" onclick="openInvitation()">
+        <div class="envelope-wrapper">
+            <div class="envelope-body">
+                <div class="tap-hint">Toca para abrir</div>
+            </div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal">
+                <img src="../Downloads/background_removed_image_8yOLNDgxSTmj0uAtmfgpkA.png" alt="Sello Lacre"> 
+            </div>
+        </div>
+    </div>
+
+    <div class="music-btn" id="music-btn" onclick="toggleMusic()">🎵
+        <audio id="bg-music" loop><source src="" type="audio/mp3"></audio>
+    </div>
+
+    <section class="intro-section fade-in">
+        <img src="../Downloads/background_removed_image_V2ZL8flNRtCLmgNo9XzNhw.png" alt="Monograma Itzel y Sam" class="monogram-img">
+        <div class="postcard-wrapper">
+            <img src="https://luxefilmography.com/wp-content/uploads/sites/7801/2022/01/Lesbian-Wedding-Walkers-Landing-Amelia-Island-scaled.jpg" alt="Nosotros" class="postcard-img">
+        </div>
+    </section>
+
+    <div class="hero fade-in">
+        <div class="hero-paper">
+            <img src="../Downloads/background_removed_image_8yOLNDgxSTmj0uAtmfgpkA.png" alt="Sello" width="200">
+            <p class="hero-pre">Nuestra Boda</p>
+            <h1 class="hero-names">Itzel Leylaní <br>& Sam</h1>
+            <div style="border-top: 2px solid #ccc; border-bottom: 2px solid #ccc; padding: 15px 0; margin: 20px 40px; color: #555;">
+                SÁBADO 04 DE ABRIL, 2026
+            </div>
+        </div>
+    </div>
+
+    <section class="countdown-section fade-in">
+        <h3 class="countdown-title">¡La cuenta regresiva comienza!</h3>
+            <p class="hero-pre">Pronto celebraremos el amor que nos une</p>
+        <div class="timer" id="timer">
+            <div class="time-box"><span id="d">00</span><small>Días</small></div>
+            <div class="time-box"><span id="h">00</span><small>Hrs</small></div>
+            <div class="time-box"><span id="m">00</span><small>Min</small></div>
+            <div class="time-box"><span id="s">00</span><small>Seg</small></div>
+        </div>
+    </section>
+
+    <section class="quote-section fade-in">
+        <p class="quote-text">"El amor es solo una palabra, hasta que alguien llega para darle sentido."</p>
+    </section>
+
+    <div class="container fade-in" style="padding: 0 20px;">
+        <div class="details-container">
+            <div class="detail-box">
+                <span class="icon">🥂</span>
+                <h3 class="detail-title">Recepción</h3>
+                <span class="detail-time">4:00 PM</span>
+                <p>Hacienda Xochicihuatl</p>
+                <p style="font-size: 0.9rem; margin-top: 10px; color: #777;">Cóctel de bienvenida</p>
+                <a href="#" target="_blank" class="btn-location">Ver Mapa</a>
+            </div>
+            <div class="detail-box" style="background-color: #fcfcfc;">
+                <span class="icon">💍</span>
+                <h3 class="detail-title">Ceremonia</h3>
+                <span class="detail-time">4:30 PM</span>
+                <p>Hacienda Xochicihuatl</p>
+                <p style="font-size: 0.9rem; margin-top: 10px; color: #777;">El gran "Sí, acepto"</p>
+                <a href="#" target="_blank" class="btn-location">Ver Mapa</a>
+            </div>
+        </div>
+        <img src="https://images.squarespace-cdn.com/content/v1/60f8fc18e343022b0e0722be/1670992800096-71GGCE83637IRVTKNEDO/bohemian-wedding-0507.jpg?format=1000w" alt="Detalle Boda" style="width: 100%; max-width: 1000px; height: auto; border-radius: 8px; display: block; margin: 0 auto 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+    </div>
+
+    <section class="dresscode-section fade-in">
+        <h3 class="countdown-title">Código de Vestimenta</h3>
+        <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">Formal</p>
+        <p style="margin-top: 15px; color: #666;">Les pedimos evitar los siguientes colores:</p>
+        <div class="palette">
+            <div style="text-align:center;"><div class="color-circle c-white"></div><small>Blanco</small></div>
+            <div style="text-align:center;"><div class="color-circle c-lilac"></div><small>Lila</small></div>
+            <div style="text-align:center;"><div class="color-circle c-blue"></div><small>Azul</small></div>
+        </div>
+    </section>
+
+    <section class="gifts-section fade-in">
+        <h3 class="countdown-title">Mesa de Regalos</h3>
+        <p style="margin-bottom: 20px;">Su presencia es nuestro mejor regalo.</p>
+        <div>
+            <a href="#" class="gift-btn">Amazon</a>
+            <div style="margin-top: 20px; font-size: 0.9rem; padding: 20px; border: 1px dashed #ccc; display: inline-block; border-radius: 8px;">
+                <strong>Transferencia (Lluvia de Sobres)</strong><br>Banco: BBVA<br>Cuenta: 1234 5678 90
+            </div>
+        </div>
+    </section>
+
+    <section class="rsvp-section">
+        <div class="fade-in">
+            <h2 style="font-family: var(--font-body); font-weight: 300; font-size: 2.5rem; margin-bottom: 10px;">¿Nos acompañas?</h2>
+            <p style="margin-bottom: 20px;">Por favor confirma tu asistencia antes del 1 de Marzo.</p>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 30px;">*Evento solo adultos.</p>
+            <a href="https://wa.me/5212226707063?text=%C2%A1Hola!%20Muchas%20gracias%20por%20la%20invitaci%C3%B3n.%20Ser%C3%A1%20un%20gusto%20acompa%C3%B1ar%20a%20Itzel%20y%20Sam%20en%20su%20boda.%20%0A%0AConfirmo%20mi%20asistencia.%20%0AMi%20nombre%20es:" class="rsvp-btn" target="_blank" rel="noopener noreferrer">CONFIRMAR ASISTENCIA</a>
+        </div>
+    </section>
+
+    <footer><p>Itzel Leylaní & Sam — 2026</p></footer>
+
+    <script>
+        // --- FUNCIÓN DE APERTURA DEL SOBRE ---
+        function openInvitation() {
+            const overlay = document.getElementById('envelope-overlay');
+            const musicBtn = document.getElementById('music-btn');
+            overlay.classList.add('envelope-open');
+            setTimeout(() => {
+                overlay.classList.add('envelope-vanish');
+                document.body.style.overflowY = 'auto';
+                musicBtn.style.opacity = '1';
+            }, 800);
+        }
+
+        // --- SCRIPTS DEL CONTENIDO ---
+        const weddingDate = new Date("April 4, 2026 16:30:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const dist = weddingDate - now;
+            document.getElementById("d").innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
+            document.getElementById("h").innerText = ("0"+Math.floor((dist%(1000*60*60*24))/(1000*60*60))).slice(-2);
+            document.getElementById("m").innerText = ("0"+Math.floor((dist%(1000*60*60))/(1000*60))).slice(-2);
+            document.getElementById("s").innerText = ("0"+Math.floor((dist%(1000*60))/1000)).slice(-2);
+        }, 1000);
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        function toggleMusic() {
+            const audio = document.getElementById("bg-music");
+            audio.paused ? audio.play() : audio.pause();
+        }
+    </script>
+</body>
+</html>
