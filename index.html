@@ -290,4 +290,214 @@
         }
         .play-btn { width: 40px; height: 40px; border-radius: 50%; background-color: var(--accent-lilac); color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .progress-container { flex-grow: 1; height: 3px; background: #ddd; position: relative; border-radius: 2px; }
-        .progress-bar { height: 10
+        .progress-bar { height: 100%; background: var(--accent-blue); width: 0%; border-radius: 2px; }
+        
+        footer { background-color: var(--accent-blue); color: white; padding: 40px; font-size: 0.9rem; }
+
+        @media(max-width: 768px) {
+            .envelope-wrapper { width: 85%; }
+            header, .parallax-banner { background-attachment: scroll; } /* Mejor rendimiento en móvil */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-overlay" onclick="openInvitation()">
+        <div class="envelope-wrapper">
+            <div class="envelope-body">
+                <div class="tap-hint">Toca para abrir</div>
+            </div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal">
+                <img src="https://purepng.com/public/uploads/large/purepng.com-wax-sealgolden-wax-sealstampswaxsealgold-1421526500593ip2e2.png" alt="Sello">
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div data-aos="fade-down" data-aos-duration="1500">
+            <h2>¡Nos Casamos!</h2>
+        </div>
+        <div data-aos="zoom-in" data-aos-duration="2000">
+            <h1>Itzel Leylaní <br>& Sam</h1>
+        </div>
+        <div class="date-container" data-aos="fade-up">
+            <div class="date-line">Sábado 04 · Abril · 2026</div>
+        </div>
+
+        <div class="custom-shape-divider-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </header>
+
+    <section class="countdown-section">
+        <div class="container">
+            <div class="divider-icon"><i class="far fa-heart"></i></div>
+            <h3 class="countdown-title">Falta muy poco</h3>
+            <div class="countdown-wrapper" id="timer">
+                <div class="time-box"><span id="d">00</span><p>Días</p></div>
+                <div class="time-box"><span id="h">00</span><p>Horas</p></div>
+                <div class="time-box"><span id="m">00</span><p>Minutos</p></div>
+                <div class="time-box"><span id="s">00</span><p>Segundos</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-section">
+        <div class="container">
+            <div class="timeline-container" data-aos="fade-up">
+                
+                <div class="timeline-icon">
+                    <i class="fas fa-ring"></i>
+                </div>
+
+                <div class="event-title">Ceremonia</div>
+                <div class="event-time">4:30 PM</div>
+
+                <div class="vertical-line"></div>
+
+                <div class="event-title">Recepción</div>
+                <div class="event-time">5:30 PM</div>
+
+                <div class="location-block">
+                    <p class="location-name">Hacienda Xochicihuatl</p>
+                    <p style="color: #666; margin-bottom: 5px;">Av. Tenextepec, 13, Solares de Tenextepec</p>
+                    <p style="color: #888; margin-bottom: 25px;">Atlixco, Pue.</p>
+                    
+                    <a href="https://goo.gl/maps/1" target="_blank" class="btn">
+                        <i class="fas fa-map-marker-alt"></i> Ver Ubicación
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="parallax-banner"></section>
+
+    <section class="dresscode-section">
+        <div class="container" data-aos="fade-up">
+            <div class="dresscode-icons">
+                <i class="fas fa-female"></i> <i class="fas fa-female"></i>
+            </div>
+            <h3 style="font-family: var(--font-body); text-transform: uppercase; letter-spacing: 2px;">Código de Vestimenta</h3>
+            <p style="font-size: 1.2rem; color: var(--accent-blue); margin-top: 10px;">FORMAL</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">Les pedimos evitar los siguientes colores:</p>
+            
+            <div class="palette">
+                <div style="text-align:center;"><div class="color-circle c-white"></div><small style="display:block; margin-top:5px;">Blanco</small></div>
+                <div style="text-align:center;"><div class="color-circle c-lilac"></div><small style="display:block; margin-top:5px;">Lila</small></div>
+                <div style="text-align:center;"><div class="color-circle c-blue"></div><small style="display:block; margin-top:5px;">Azul</small></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gifts-section">
+        <div class="container" data-aos="zoom-in">
+            <h3 class="countdown-title">Mesa de Regalos</h3>
+            <p>Su presencia es nuestro mejor regalo.</p>
+            
+            <div class="gift-grid">
+                <div class="gift-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-shopping-cart" style="font-size: 3rem; color: #FF9900;"></i>
+                        <h4 style="margin: 20px 0; font-size: 1.3rem;">Lista de Amazon</h4>
+                        <p style="font-size: 0.9rem; color: #666;">Sugerencias para nuestro hogar.</p>
+                    </div>
+                    <a href="#" class="btn" style="background-color: transparent; border: 1px solid var(--accent-lilac); color: var(--accent-lilac); margin-top: 20px;">Ver lista</a>
+                </div>
+
+                <div class="gift-card">
+                    <div style="text-align: center;">
+                        <i class="fas fa-envelope-open-text" style="font-size: 3rem; color: var(--accent-lilac);"></i>
+                        <h4 style="margin: 20px 0; font-size: 1.3rem;">Lluvia de Sobres</h4>
+                        <p style="font-size: 0.9rem; color: #666;">BBVA: 1234 5678 9012<br>A nombre de: <strong>Sam</strong></p>
+                    </div>
+                    <span style="font-size: 0.8rem; color: #999; margin-top: 20px;">¡Gracias!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 80px 0; background: white; text-align: center;">
+        <div class="container">
+            <h2 style="font-family: var(--font-script); font-size: 3rem; color: var(--accent-lilac);">Confirmar Asistencia</h2>
+            <p style="margin-bottom: 30px;">Por favor confirma antes del 1 de Marzo, 2026</p>
+            <a href="https://wa.me/?text=Hola%20Itzel%20y%20Sam,%20confirmo%20mi%20asistencia." class="btn">
+                <i class="fab fa-whatsapp"></i> Enviar WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>Itzel Leylaní & Sam · 04.04.2026</p>
+    </footer>
+
+    <div class="music-player-container" id="musicPlayer">
+        <button id="playPauseBtn" class="play-btn"><i class="fas fa-play"></i></button>
+        <div style="font-size: 0.8rem; color: #555;">Nuestra canción</div>
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <audio id="audioPlayer" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        function openInvitation() {
+            const overlay = document.getElementById('envelope-overlay');
+            const musicPlayer = document.getElementById('musicPlayer');
+            const audio = document.getElementById('audioPlayer');
+            const playIcon = document.querySelector('#playPauseBtn i');
+
+            overlay.classList.add('envelope-open');
+            setTimeout(() => {
+                overlay.classList.add('envelope-vanish');
+                document.body.style.overflowY = 'auto';
+                musicPlayer.style.opacity = '1';
+                audio.play().then(() => {
+                    playIcon.classList.remove('fa-play');
+                    playIcon.classList.add('fa-pause');
+                }).catch(e => console.log("Autoplay bloqueado"));
+            }, 800);
+        }
+
+        const weddingDate = new Date(2026, 3, 4, 16, 30, 0).getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            document.getElementById("d").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("h").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("m").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("s").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playPauseBtn');
+        const playIcon = playBtn.querySelector('i');
+        const progressBar = document.getElementById('progressBar');
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.remove('fa-play');
+                playIcon.classList.add('fa-pause');
+            } else {
+                audio.pause();
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+            }
+        });
+
+        audio.addEventListener('timeupdate', (e) => {
+            const { duration, currentTime } = e.srcElement;
+            const progressPercent = (currentTime / duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+        });
+    </script>
+</body>
+</html>
