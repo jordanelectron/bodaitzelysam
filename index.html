@@ -24,10 +24,9 @@
             --accent-gold: #C5A059;     
             --text-color: #5A5A66;      
             
-            --date-gold: #9e8b6b; /* Se mantiene para referencia, aunque ahora la fecha es blanca */
+            --date-gold: #9e8b6b; 
 
             /* --- FUENTES --- */
-            /* CAMBIO 3: Reemplazar cursiva (Parisienne) por Domine */
             --font-script: 'Domine', serif; 
             --font-body: 'Libre Franklin', sans-serif;
             --font-names: 'Della Respira', serif; 
@@ -159,14 +158,13 @@
             font-weight: 300;
         }
 
-        /* --- ESTILO DE FECHA (MODIFICADO CAMBIO 1) --- */
+        /* --- ESTILO DE FECHA CORREGIDO (SIN SOLAPAMIENTO) --- */
         .elegant-date-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
             margin-top: 40px;
-            /* CAMBIO 1: Color blanco */
             color: white; 
             font-family: var(--font-names);
         }
@@ -190,7 +188,6 @@
         .line-deco {
             width: 100%;
             height: 2px;
-            /* CAMBIO 1: Líneas blancas para coincidir */
             background-color: white; 
             border-radius: 1px;
         }
@@ -201,20 +198,26 @@
             align-items: center;
             justify-content: center;
             line-height: 1;
+            /* Evita que se aplaste */
+            flex-shrink: 0;
         }
 
         .day-number {
             font-size: 6rem;
             font-weight: 400;
-            /* CAMBIO 1: Sombra mucho más marcada y oscura */
             text-shadow: 4px 4px 1px rgba(80, 60, 40, 0.95); 
-            margin-bottom: -10px;
+            /* CORRECCIÓN: Quitamos margen negativo y ajustamos altura de línea */
+            margin-bottom: 0px; 
+            line-height: 0.9;
         }
 
         .year-number {
             font-size: 1.2rem;
             letter-spacing: 8px;
             font-weight: bold;
+            /* CORRECCIÓN: Margen superior para separar del número */
+            margin-top: 10px;
+            display: block;
         }
 
         
@@ -239,7 +242,6 @@
 
         /* COUNTDOWN */
         .countdown-section { padding: 80px 0; background-color: var(--bg-color); }
-        /* Se actualiza la fuente del título */
         .countdown-title { font-family: var(--font-script); font-size: 3rem; color: var(--accent-lilac); margin-bottom: 30px; font-weight: 700; }
         .countdown-wrapper { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
         .time-box span { font-size: 3rem; font-family: var(--font-body); font-weight: 300; color: var(--accent-blue); line-height: 1; }
@@ -746,7 +748,7 @@
             progressBar.style.width = `${progressPercent}%`;
         });
 
-        // 4. LÓGICA DE LA GALERÍA (CAMBIO 4: IMÁGENES ACTUALIZADAS)
+        // 4. LÓGICA DE LA GALERÍA
         const photos = [
             { src: 'gal1.jpg', text: "El inicio de nuestro 'para siempre'" },
             { src: 'gal2.jpg', text: "Donde hay amor, hay vida" },
