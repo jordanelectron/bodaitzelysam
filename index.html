@@ -1,3 +1,13 @@
+Claro que sí. Aquí tienes el código completo con la modificación solicitada.
+
+He realizado dos cambios:
+
+1. **En el `<head>`:** Agregué la fuente **"Della Respira"** al enlace de Google Fonts.
+2. **En el CSS (`header h1`):** Cambié la propiedad `font-family` únicamente para el título principal donde aparecen los nombres de las novias.
+
+Aquí está el código listo para copiar y pegar:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,7 +17,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Della+Respira&family=Libre+Franklin:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -27,6 +37,8 @@
             /* --- FUENTES --- */
             --font-script: 'Parisienne', cursive;
             --font-body: 'Libre Franklin', sans-serif;
+            /* Nueva variable opcional, pero la aplicaremos directo al H1 */
+            --font-names: 'Della Respira', serif; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -124,7 +136,7 @@
             position: relative; height: 100vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; color: white;
-            background-image: url('https://luxefilmography.com/wp-content/uploads/sites/7801/2022/01/Lesbian-Wedding-Walkers-Landing-Amelia-Island-scaled.jpg');
+            background-image: url('foto1.png');
             background-size: cover; background-position: center; background-attachment: fixed;
             z-index: 1;
         }
@@ -136,8 +148,9 @@
         }
 
         header h1 {
-            font-family: var(--font-script);
-            font-size: 6rem;
+            /* CAMBIO DE FUENTE AQUÍ: Solo para el nombre de las novias */
+            font-family: 'Della Respira', serif; 
+            font-size: 5rem; /* Ajusté ligeramente el tamaño para esta fuente */
             margin: 0;
             text-shadow: 0 4px 15px rgba(0,0,0,0.3);
             line-height: 1.1;
@@ -246,7 +259,7 @@
 
         .parallax-banner {
             height: 400px;
-            background-image: url('https://nilkagissell.com/wp-content/uploads/Lesbian-Wedding-at-La-Concha-Resort-10-of-33.jpg');
+            background-image: url('foto2.png');
             background-size: cover; background-position: center; background-attachment: fixed;
             display: flex; align-items: center; justify-content: center;
         }
@@ -306,7 +319,7 @@
         footer { background-color: var(--accent-blue); color: white; padding: 40px; font-size: 0.9rem; }
 
         @media(max-width: 768px) {
-            header h1 { font-size: 4rem; }
+            header h1 { font-size: 3.5rem; } /* Ajuste responsivo para Della Respira */
             .envelope-wrapper { width: 85%; }
             header, .parallax-banner { background-attachment: scroll; }
             .gifts-flex-container { flex-direction: column; align-items: center; }
@@ -374,7 +387,7 @@
                 <h3 class="event-title">Recepción</h3>
                 <p class="event-time">4:00 PM</p>
                 
-                <div class="vertical-line"></div>             
+                <div class="vertical-line"></div>              
                 <div class="address-block">
                     <p class="address-name">Hacienda Xochicihuatl</p>
                     <p class="address-detail">Av. Tenextepec, 13, Solares de Tenextepec</p>
@@ -394,10 +407,10 @@
                 <i class="fas fa-female"></i> <i class="fas fa-female"></i>
             </div>
             <h3 style="font-family: var(--font-body); text-transform: uppercase; letter-spacing: 2px;">Código de Vestimenta</h3>
-		
+        
             <p style="font-size: 1.2rem; color: var(--accent-blue); margin-top: 10px;">FORMAL y FRESCO</p>
             <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">Nota Especial: Les agradecemos de corazón reservar la paleta de <br>
-				Blanco, Lila y Azul exclusivamente para las novias.</p>
+                Blanco, Lila y Azul exclusivamente para las novias.</p>
             
             <div class="palette">
                 <div style="text-align:center;"><div class="color-circle c-white"></div><small style="display:block; margin-top:5px;">Blanco</small></div>
@@ -423,10 +436,10 @@
                     <i class="fas fa-envelope-open-text" style="font-size: 2rem; color: var(--accent-lilac);"></i>
                     <h4 style="margin: 15px 0;">Lluvia de Sobres</h4>
                     <p style="font-size: 0.9rem;">
-						Banco: BanCoppel<br>
-						Número de cuenta: 10067224154 <br>
-						Cuenta CLABE: 137650100672241546<br>
-						A nombre de: <strong> Itzel Leylaní Cruz Hernández</strong></p>
+                        Banco: BanCoppel<br>
+                        Número de cuenta: 10067224154 <br>
+                        Cuenta CLABE: 137650100672241546<br>
+                        A nombre de: <strong> Itzel Leylaní Cruz Hernández</strong></p>
                 </div>
             </div>
         </div>
@@ -521,3 +534,5 @@
     </script>
 </body>
 </html>
+
+```
