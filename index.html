@@ -27,7 +27,6 @@
             /* --- FUENTES --- */
             --font-script: 'Parisienne', cursive;
             --font-body: 'Libre Franklin', sans-serif;
-            /* Nueva variable opcional, pero la aplicaremos directo al H1 */
             --font-names: 'Della Respira', serif; 
         }
 
@@ -138,9 +137,9 @@
         }
 
         header h1 {
-            /* CAMBIO DE FUENTE AQUÍ: Solo para el nombre de las novias */
+            /* FUENTE DELLA RESPIRA */
             font-family: 'Della Respira', serif; 
-            font-size: 5rem; /* Ajusté ligeramente el tamaño para esta fuente */
+            font-size: 5rem;
             margin: 0;
             text-shadow: 0 4px 15px rgba(0,0,0,0.3);
             line-height: 1.1;
@@ -155,9 +154,23 @@
             font-weight: 300;
         }
 
-        .date-container { margin-top: 40px; border-top: 1px solid white; border-bottom: 1px solid white; padding: 15px 40px; }
-        .date-line { font-size: 1.4rem; letter-spacing: 2px; text-transform: uppercase; }
+        /* --- ESTILOS DE LA FECHA (No se rompe) --- */
+        .date-container { 
+            margin-top: 40px; 
+            border-top: 1px solid white; 
+            border-bottom: 1px solid white; 
+            padding: 15px 40px;
+            width: fit-content; 
+            max-width: 90%; 
+        }
 
+        .date-line { 
+            font-size: 1.4rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            white-space: nowrap; /* Evita salto de línea */
+        }
+        
         .custom-shape-divider-bottom {
             position: absolute; bottom: -1px; left: 0; width: 100%; overflow: hidden; line-height: 0;
             transform: rotate(180deg); z-index: 2;
@@ -184,10 +197,10 @@
         .time-box span { font-size: 3rem; font-family: var(--font-body); font-weight: 300; color: var(--accent-blue); line-height: 1; }
         .time-box p { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; color: #999; }
 
-        /* --- IMAGEN DE FACHADA GRANDE Y RESPONSIVA --- */
+        /* --- IMAGEN DE FACHADA --- */
         .img-responsive-large {
             width: 100%;
-            max-width: 900px; /* Tamaño máximo grande */
+            max-width: 900px; 
             height: auto;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -195,7 +208,7 @@
             display: block;
         }
 
-        /* --- NUEVO ESTILO VERTICAL EVENTOS --- */
+        /* --- EVENTOS (VERTICAL) --- */
         .events-section { padding: 80px 0; background: white; }
         
         .wedding-timeline {
@@ -209,7 +222,7 @@
 
         .timeline-icon {
             font-size: 2.5rem;
-            color: var(--accent-gold);
+            color: var(--accent-lilac); /* Color corregido */
             margin-bottom: 20px;
         }
 
@@ -231,7 +244,7 @@
         .vertical-line {
             width: 1px;
             height: 60px;
-            background-color: var(--accent-gold);
+            background-color: var(--accent-lilac); /* Color corregido */
             margin: 20px 0;
         }
 
@@ -245,7 +258,6 @@
         }
         .address-name { font-weight: 600; font-size: 1.1rem; color: var(--text-color); }
         .address-detail { font-size: 0.9rem; color: #777; }
-
 
         .parallax-banner {
             height: 400px;
@@ -261,7 +273,7 @@
         .color-circle::after { content: "✕"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #a00; font-size: 1rem; }
         .c-white { background: #FFFFFF; } .c-lilac { background: var(--accent-lilac); } .c-blue { background: var(--accent-blue); }
 
-        /* --- REGALOS IGUAL ALTURA --- */
+        /* --- REGALOS --- */
         .gifts-section { padding: 80px 0; background-color: var(--bg-color); }
         
         .gifts-flex-container {
@@ -279,7 +291,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
             width: 100%; 
             max-width: 350px; 
-            /* Para que tengan la misma altura */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -308,12 +319,23 @@
         
         footer { background-color: var(--accent-blue); color: white; padding: 40px; font-size: 0.9rem; }
 
+        /* --- MEDIA QUERIES (RESPONSIVO) --- */
         @media(max-width: 768px) {
-            header h1 { font-size: 3.5rem; } /* Ajuste responsivo para Della Respira */
+            header h1 { font-size: 3.5rem; } 
             .envelope-wrapper { width: 85%; }
             header, .parallax-banner { background-attachment: scroll; }
             .gifts-flex-container { flex-direction: column; align-items: center; }
             .gift-card { width: 100%; }
+
+            /* AJUSTE CLAVE PARA LA FECHA EN CELULAR */
+            .date-container {
+                padding: 15px 10px; 
+                width: 90%; 
+            }
+            .date-line {
+                font-size: 4vw; /* Reduce el tamaño proporcionalmente al ancho del celular */
+                letter-spacing: 1px;
+            }
         }
     </style>
 </head>
@@ -439,7 +461,7 @@
         <div class="container">
             <h2 style="font-family: var(--font-script); font-size: 3rem; color: var(--accent-lilac);">Confirme su asistencia</h2>
             <p style="margin-bottom: 30px;">Celebrar nuestro amor es un sueño hecho realidad,<br> y para que sea perfecto, nos encantaría contar contigo en nuestra lista de invitados. <br>¿Nos confirmas tu asistencia ?</p>
-            <a href="https://wa.me/5212226707063?text=%C2%A1Hola!%20Muchas%20gracias%20por%20la%20invitaci%C3%B3n.%20Ser%C3%A1%20un%20gusto%20acompa%C3%B1ar%20a%20Itzel%20y%20Sam%20en%20su%20boda.%20%0A%0AConfirmo%20mi%20asistencia.%20%0AMi%20nombre%20es:" class="btn">
+            <a href="https://wa.me/5212226707063?text=%C2%A1Hola!%0AMuchas%20gracias%20por%20la%20invitaci%C3%B3n.%20Ser%C3%A1%20un%20gusto%20acompa%C3%B1ar%20a%20Itzel%20Leylan%C3%AD%20y%20Samanta%20en%20su%20boda.%0A%0AConfirmamos%20o%20confirmo%20mi%20asistencia.%0AMi%20nombre%20es:" class="btn" target="_blank">
                 <i class="fab fa-whatsapp"></i> Enviar WhatsApp de Confirmación
             </a>
         </div>
@@ -524,5 +546,3 @@
     </script>
 </body>
 </html>
-
-```
