@@ -24,11 +24,11 @@
             --accent-gold: #C5A059;     
             --text-color: #5A5A66;      
             
-            /* Color específico para el estilo de la fecha (Dorado Antiguo) */
-            --date-gold: #9e8b6b; 
+            --date-gold: #9e8b6b; /* Se mantiene para referencia, aunque ahora la fecha es blanca */
 
             /* --- FUENTES --- */
-            --font-script: 'Parisienne', cursive;
+            /* CAMBIO 3: Reemplazar cursiva (Parisienne) por Domine */
+            --font-script: 'Domine', serif; 
             --font-body: 'Libre Franklin', sans-serif;
             --font-names: 'Della Respira', serif; 
             --font-envelope: 'Domine', serif;
@@ -159,18 +159,18 @@
             font-weight: 300;
         }
 
-        /* --- NUEVO ESTILO DE FECHA (TIPO IMAGEN) --- */
+        /* --- ESTILO DE FECHA (MODIFICADO CAMBIO 1) --- */
         .elegant-date-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
             margin-top: 40px;
-            color: var(--date-gold); /* Color dorado tipo imagen */
-            font-family: var(--font-names); /* Serif elegante */
+            /* CAMBIO 1: Color blanco */
+            color: white; 
+            font-family: var(--font-names);
         }
 
-        /* Bloques laterales (Sábado / Abril) */
         .side-block {
             display: flex;
             flex-direction: column;
@@ -190,11 +190,11 @@
         .line-deco {
             width: 100%;
             height: 2px;
-            background-color: var(--date-gold);
+            /* CAMBIO 1: Líneas blancas para coincidir */
+            background-color: white; 
             border-radius: 1px;
         }
 
-        /* Bloque Central (04 y Año) */
         .center-block {
             display: flex;
             flex-direction: column;
@@ -204,16 +204,16 @@
         }
 
         .day-number {
-            font-size: 6rem; /* Número grande */
+            font-size: 6rem;
             font-weight: 400;
-            /* Sombra sólida para efecto 3D como en la imagen */
-            text-shadow: 3px 3px 0px rgba(160, 140, 91, 0.4); 
-            margin-bottom: -10px; /* Juntar con el año */
+            /* CAMBIO 1: Sombra mucho más marcada y oscura */
+            text-shadow: 4px 4px 1px rgba(80, 60, 40, 0.95); 
+            margin-bottom: -10px;
         }
 
         .year-number {
             font-size: 1.2rem;
-            letter-spacing: 8px; /* Año muy separado */
+            letter-spacing: 8px;
             font-weight: bold;
         }
 
@@ -239,7 +239,8 @@
 
         /* COUNTDOWN */
         .countdown-section { padding: 80px 0; background-color: var(--bg-color); }
-        .countdown-title { font-family: var(--font-script); font-size: 3.5rem; color: var(--accent-lilac); margin-bottom: 30px; }
+        /* Se actualiza la fuente del título */
+        .countdown-title { font-family: var(--font-script); font-size: 3rem; color: var(--accent-lilac); margin-bottom: 30px; font-weight: 700; }
         .countdown-wrapper { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
         .time-box span { font-size: 3rem; font-family: var(--font-body); font-weight: 300; color: var(--accent-blue); line-height: 1; }
         .time-box p { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; color: #999; }
@@ -481,9 +482,9 @@
             .gifts-flex-container { flex-direction: column; align-items: center; }
             .gift-card { width: 100%; }
             
-            /* Ajuste de fecha elegante para móviles: se hace proporcional para no romperse */
-            .side-text { font-size: 3vw; } /* Texto se adapta */
-            .day-number { font-size: 15vw; } /* Numero se adapta */
+            /* Ajuste de fecha elegante para móviles */
+            .side-text { font-size: 3vw; }
+            .day-number { font-size: 15vw; } 
             .year-number { font-size: 3vw; }
             .elegant-date-wrapper { gap: 10px; width: 95%; margin: 30px auto; }
             
@@ -543,7 +544,6 @@
 
     <section class="countdown-section">
         <div class="container">
-            <img src="monograma.png" width="200" style="margin-bottom: 20px;">
             <h3 class="countdown-title">Falta muy poco</h3>
             <div class="countdown-wrapper" id="timer">
                 <div class="time-box"><span id="d">00</span><p>Días</p></div>
@@ -634,7 +634,7 @@
 
         <div class="slideshow-container" data-aos="zoom-in">
             <div class="polaroid-card" id="polaroid-display">
-                <img id="p-img" src="imagen1.png" alt="Foto Boda">
+                <img id="p-img" src="gal1.jpg" alt="Foto Boda">
                 <span id="p-text">El inicio de nuestro 'para siempre'</span>
             </div>
 
@@ -746,14 +746,14 @@
             progressBar.style.width = `${progressPercent}%`;
         });
 
-        // 4. LÓGICA DE LA GALERÍA
+        // 4. LÓGICA DE LA GALERÍA (CAMBIO 4: IMÁGENES ACTUALIZADAS)
         const photos = [
-            { src: 'imagen1.png', text: "El inicio de nuestro 'para siempre'" },
-            { src: 'imagen2.png', text: "Donde hay amor, hay vida" },
-            { src: 'imagen3.png', text: "Dos almas, un solo corazón" },
-            { src: 'imagen4.png', text: "Nuestra mejor aventura comienza hoy" },
-            { src: 'imagen5.png', text: "Sí, ayer, hoy y siempre" },
-            { src: 'imagen6.png', text: "Bajo el cielo que fue testigo" }
+            { src: 'gal1.jpg', text: "El inicio de nuestro 'para siempre'" },
+            { src: 'gal2.jpg', text: "Donde hay amor, hay vida" },
+            { src: 'gal3.jpg', text: "Dos almas, un solo corazón" },
+            { src: 'gal4.jpg', text: "Nuestra mejor aventura comienza hoy" },
+            { src: 'gal5.jpg', text: "Sí, ayer, hoy y siempre" },
+            { src: 'gal6.jpg', text: "Bajo el cielo que fue testigo" }
         ];
 
         let currentIndex = 0;
